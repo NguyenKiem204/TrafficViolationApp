@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="images\back4.jpg" />
+    <None Remove="images\bg.avif" />
+    <None Remove="images\bg1.jpeg" />
+    <None Remove="images\bg2.webp" />
+    <None Remove="images\logo.png" />
+    <None Remove="images\traffic.avif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="images\back4.jpg" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
+    <Resource Include="images\bg.avif" />
+    <Resource Include="images\bg1.jpeg" />
+    <Resource Include="images\bg2.webp" />
+    <Resource Include="images\logo.png" />
+    <Resource Include="images\traffic.avif" />
+  </ItemGroup>
+
+</Project>

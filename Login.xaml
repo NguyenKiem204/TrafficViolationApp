@@ -1,0 +1,111 @@
+﻿<Window x:Class="TrafficViolationApp.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TrafficViolationApp"
+        mc:Ignorable="d"
+        Title="Login"
+        Icon="/images/logo.png"
+        Height="600"
+        Width="1200"
+        WindowStartupLocation="CenterScreen"
+        Background="#080710">
+        
+    
+    <Grid>
+        <Image Source="/images/bg.avif"
+               Stretch="UniformToFill"
+               HorizontalAlignment="Stretch"
+               VerticalAlignment="Stretch" />
+
+        <Grid Background="#55000000"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+              Width="400"
+              Height="520"
+              Margin="0,0,0,0">
+
+            <Border BorderBrush="White"
+                    BorderThickness="2"
+                    Background="#99000000"
+                    CornerRadius="10"
+                    Padding="50,35,50,35">
+                <Grid VerticalAlignment="Center"
+                      HorizontalAlignment="Center">
+                    <StackPanel>
+                        <TextBlock Text="Login Here"
+                                   FontSize="32"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,0,0,20" />
+
+                        <TextBlock Text="Username"
+                                   Foreground="White"
+                                   FontSize="16" />
+                        <TextBox x:Name="txtEmail"
+                                 Height="40"
+                                 Margin="0,10,0,0"
+                                 Padding="10"
+                                 Background="#333333"
+                                 Foreground="White"
+                                 FontSize="14"
+                                 BorderBrush="White"
+                                 BorderThickness="1" GotFocus="txtEmail_GotFocus" TextChanged="txtEmail_TextChanged" />
+
+                        <TextBlock Text="Password"
+                                   Foreground="White"
+                                   FontSize="16" />
+                        <PasswordBox x:Name="txtPass"
+                                     Height="40"
+                                     Margin="0,10,0,0"
+                                     Padding="10"
+                                     Background="#333333"
+                                     Foreground="White"
+                                     FontSize="14"
+                                     BorderBrush="White"
+                                     BorderThickness="1" GotFocus="txtPass_GotFocus" />
+                        <TextBlock x:Name="txtError" Text=""
+                                   Foreground="Red"
+                                   FontSize="16"
+                                   Height="25"
+                                   Margin="0, 10, 0, 0"/>
+
+                        <Button x:Name="btnLogin"
+                                Content="Log In"
+                                Background="White"
+                                Foreground="#080710"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Height="50"
+                                Margin="0,5,0,0"
+                                BorderBrush="White"
+                                BorderThickness="1" Click="btnLogin_Click" IsDefault="True" />
+
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,20,0,0">
+                            <Button Content="Google"
+                                    Background="#DB4437"
+                                    Foreground="White"
+                                    Width="130"
+                                    Height="40"
+                                    Margin="5"
+                                    BorderBrush="White"
+                                    BorderThickness="1" />
+                            <Button Content="Facebook"
+                                    Background="#4267B2"
+                                    Foreground="White"
+                                    Width="130"
+                                    Height="40"
+                                    Margin="5"
+                                    BorderBrush="White"
+                                    BorderThickness="1" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

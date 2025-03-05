@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TrafficViolationApp.dao;
+using TrafficViolationApp.model;
 
 namespace TrafficViolationApp
 {
@@ -42,21 +43,30 @@ namespace TrafficViolationApp
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             UserDAO userDAO = new UserDAO();
-            string email = txtEmail.Text;
-            string password = txtPass.Password;
-            if (userDAO.checkLogin(email, password))
+            string email = txtEmail.Text.Trim();
+            string password = txtPass.Password.Trim();
+
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                MainWindow mainWindow = new MainWindow();
-                this.Close();
-                mainWindow.Show();
+                txtError.Text = "Email or Password cannot be empty!";
+                return;
+            }
+            User? user = userDAO.CheckLogin(email, password);
+            if (user != null)
+            {
+                UserSession.Instance.User = user;
+                Home home = new Home();
+                home.Show();
+                this.Hide();
             }
             else
             {
                 txtEmail.Text = email;
-                txtPass.Password = password;
-                txtError.Text = "Email or Password wrong";
+                txtPass.Password = "";
+                txtError.Text = "Invalid email or password!";
             }
         }
+
 
 
     }

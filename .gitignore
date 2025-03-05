@@ -1,1 +1,75 @@
+# Ignore Visual Studio specific files
 .vs/
+*.user
+*.suo
+*.vsp
+*.vspx
+*.vsmdi
+*.testsettings
+
+# Ignore build and output directories
+bin/
+obj/
+Debug/
+Release/
+*.exe
+*.dll
+*.pdb
+*.log
+*.cache
+*.ilk
+*.map
+*.ncb
+*.pch
+*.pdb
+*.idb
+*.tlog
+*.o
+*.obj
+*.tlb
+*.tlh
+*.tmp
+*.csproj.user
+*.csproj.FileListAbsolute.txt
+*.csproj.CoreCompileInputs.cache
+
+# Ignore NuGet packages
+packages/
+*.nupkg
+project.lock.json
+
+# Ignore Rider / JetBrains IDE files
+.idea/
+*.sln.iml
+
+# Ignore ReSharper files
+_ReSharper*/
+*.DotSettings.user
+
+# Ignore Rider / JetBrains IDE files
+.idea/
+*.sln.iml
+
+# Ignore Application Insights telemetry
+ApplicationInsights.config
+ApplicationInsightsTelemetry.config
+
+# Ignore Publish files
+Publish/
+*.publish.xml
+
+# Ignore Entity Framework Migrations
+Migrations/
+
+# Ignore log files
+*.log
+
+# Ignore compiled files
+*.dll
+*.exe
+*.pdb
+*.cache
+
+# Ignore secrets and credentials
+secrets.json
+appsettings.json

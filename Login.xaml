@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:TrafficViolationApp"
         mc:Ignorable="d"
         Title="Login"
-        Icon="/images/logo.png"
+        Icon="/images/logo1.png"
         Height="600"
         Width="1200"
         WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         Background="#080710">
         
     

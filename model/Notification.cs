@@ -1,37 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace TrafficViolationApp.model
+namespace TrafficViolationApp.model;
+
+public partial class Notification
 {
-    public class Notification
-    {
-        private int notificationID;
-        private int userID;
-        private string message;
-        private string plateNumber;
-        private string sentDate;
-        private bool isRead;
-        public Notification() { }
+    public int NotificationId { get; set; }
 
-        public Notification(int notificationID, int userID, string message, string plateNumber, string sentDate, bool isRead)
-        {
-            this.NotificationID = notificationID;
-            this.UserID = userID;
-            this.Message = message;
-            this.PlateNumber = plateNumber;
-            this.SentDate = sentDate;
-            this.IsRead = isRead;
-        }
+    public int UserId { get; set; }
 
-        public int NotificationID { get => notificationID; set => notificationID = value; }
-        public int UserID { get => userID; set => userID = value; }
-        public string Message { get => message; set => message = value; }
-        public string PlateNumber { get => plateNumber; set => plateNumber = value; }
-        public string SentDate { get => sentDate; set => sentDate = value; }
-        public bool IsRead { get => isRead; set => isRead = value; }
-    }
+    public string Message { get; set; } = null!;
+
+    public string? PlateNumber { get; set; }
+
+    public DateTime? SentDate { get; set; }
+
+    public bool? IsRead { get; set; }
+
+    public virtual User User { get; set; } = null!;
 }

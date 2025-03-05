@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="TrafficViolationApp.view.UserControls.SidebarMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrafficViolationApp.view.UserControls"
+             mc:Ignorable="d" 
+            d:DesignHeight="720" d:DesignWidth="250">
+
+    <UserControl.Resources>
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="15,12"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                            <StackPanel Orientation="Horizontal">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#3D51A9"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#2C3C7E"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="#304097">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Logo and App Name -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0">
+            <Image Source="pack://application:,,,/images/logo1.png" Width="40" Height="40"/>
+            <TextBlock Text="Traffic Violation" FontSize="20" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <!-- Menu Items -->
+        <StackPanel Grid.Row="1" Margin="10,20">
+            <Button Style="{StaticResource MenuButtonStyle}" Tag="Dashboard" x:Name="btnDashboard" Click="OnMenuItemClick">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE80F;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="Dashboard"/>
+                </StackPanel>
+            </Button>
+            <Button Style="{StaticResource MenuButtonStyle}" Tag="Reports" x:Name="btnReports" Click="OnMenuItemClick">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE7BA;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="Reports"/>
+                </StackPanel>
+            </Button>
+            <Button Style="{StaticResource MenuButtonStyle}" Tag="Violations" x:Name="btnViolations" Click="OnMenuItemClick">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE8F1;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="Violations"/>
+                </StackPanel>
+            </Button>
+            <Button Style="{StaticResource MenuButtonStyle}" Tag="Vehicles" x:Name="btnVehicles" Click="OnMenuItemClick">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE804;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="Vehicles"/>
+                </StackPanel>
+            </Button>
+            <Button Style="{StaticResource MenuButtonStyle}" Tag="Users" x:Name="btnUsers" Click="OnMenuItemClick">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="Users"/>
+                </StackPanel>
+            </Button>
+            <Button Style="{StaticResource MenuButtonStyle}" Tag="Notifications" x:Name="btnNotifications" Click="OnMenuItemClick">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE91C;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="Notifications"/>
+                </StackPanel>
+            </Button>
+            <Button Style="{StaticResource MenuButtonStyle}" Tag="Settings" x:Name="btnSettings" Click="OnMenuItemClick">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="Settings"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <!-- User Profile -->
+        <Border Grid.Row="2" BorderBrush="#3D51A9" BorderThickness="0,1,0,0" Padding="20,15">
+            <StackPanel Orientation="Horizontal">
+                <Border Width="40" Height="40" CornerRadius="20" Background="#3D51A9">
+                    <TextBlock x:Name="txtUserInitials" Text="JD" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <StackPanel Margin="10,0,0,0">
+                    <TextBlock x:Name="txtUserName" Text="John Doe" Foreground="White" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="txtUserRole" Text="Administrator" Foreground="#CCFFFFFF" FontSize="12"/>
+                </StackPanel>
+                <Button Content="&#xE7E8;" FontFamily="Segoe MDL2 Assets" Background="Transparent" BorderThickness="0" Foreground="White" VerticalAlignment="Center" Margin="20,0,0,0" x:Name="btnLogout" Click="btnLogout_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

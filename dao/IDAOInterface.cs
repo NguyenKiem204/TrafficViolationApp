@@ -12,6 +12,6 @@ namespace TrafficViolationApp.dao
         public int update(T t);
         public int delete(T t);
         public List<T> selectAll();
-        public T selectById(ID id);
+        public T? selectById(ID id);
     }
 }

@@ -13,19 +13,36 @@
     <None Remove="images\bg.avif" />
     <None Remove="images\bg1.jpeg" />
     <None Remove="images\bg2.webp" />
+    <None Remove="images\logo.jpeg" />
     <None Remove="images\logo.png" />
+    <None Remove="images\logo1.png" />
     <None Remove="images\traffic.avif" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="images\back4.jpg" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.2" />
     <Resource Include="images\bg.avif" />
     <Resource Include="images\bg1.jpeg" />
     <Resource Include="images\bg2.webp" />
+    <Resource Include="images\logo.jpeg" />
     <Resource Include="images\logo.png" />
+    <Resource Include="images\logo1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="images\traffic.avif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

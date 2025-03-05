@@ -1,40 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TrafficViolationApp.model
+namespace TrafficViolationApp.model;
+
+public partial class User
 {
-    public class User
+    public int UserId { get; set; }
+
+    public string FullName { get; set; } = null!;
+
+    public string Email { get; set; } = null!;
+
+    public string Password { get; set; } = null!;
+
+    public string Role { get; set; } = null!;
+
+    public string Phone { get; set; } = null!;
+
+    public string? Address { get; set; }
+
+    public User()
     {
-        private int userID;
-        private string fullName;
-        private string email;
-        private string password;
-        private string role;
-        private string phone;
-        private string address;
-
-        public User() { }
-
-        public User(int userID, string fullName, string email, string password, string role, string phone, string address)
-        {
-            this.UserID = userID;
-            this.FullName = fullName;
-            this.Email = email;
-            this.Password = password;
-            this.Role = role;
-            this.Phone = phone;
-            this.Address = address;
-        }
-
-        public int UserID { get => userID; set => userID = value; }
-        public string FullName { get => fullName; set => fullName = value; }
-        public string Email { get => email; set => email = value; }
-        public string Password { get => password; set => password = value; }
-        public string Role { get => role; set => role = value; }
-        public string Phone { get => phone; set => phone = value; }
-        public string Address { get => address; set => address = value; }
     }
+
+    public User(int userId, string fullName, string email, string password, string role, string phone, string? address)
+    {
+        UserId = userId;
+        FullName = fullName;
+        Email = email;
+        Password = password;
+        Role = role;
+        Phone = phone;
+        Address = address;
+    }
+    public User(string fullName, string email, string password, string role, string phone, string? address)
+    {
+        FullName = fullName;
+        Email = email;
+        Password = password;
+        Role = role;
+        Phone = phone;
+        Address = address;
+    }
+
+    public override string? ToString()
+    {
+        return $"User({UserId} - {FullName} - {Email} - {Password} - {Role} - {Phone} - {Address})";
+    }
+
+    public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+
+    public virtual ICollection<Report> ReportProcessedByNavigations { get; set; } = new List<Report>();
+
+    public virtual ICollection<Report> ReportReporters { get; set; } = new List<Report>();
+
+    public virtual ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
+
+    public virtual ICollection<Violation> Violations { get; set; } = new List<Violation>();
 }

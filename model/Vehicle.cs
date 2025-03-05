@@ -1,38 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TrafficViolationApp.model
+namespace TrafficViolationApp.model;
+
+public partial class Vehicle
 {
-    public class Vehicle
-    {
-        private int vehicleID;
-        private string plateNumber;
-        private int ownerID;
-        private string brand;
-        private string model;
-        private int manufactureYear;
+    public int VehicleId { get; set; }
 
-        public Vehicle() { }
+    public string PlateNumber { get; set; } = null!;
 
-        public Vehicle(int vehicleID, string plateNumber, int ownerID, string brand, string model, int manufactureYear)
-        {
-            this.VehicleID = vehicleID;
-            this.PlateNumber = plateNumber;
-            this.OwnerID = ownerID;
-            this.Brand = brand;
-            this.Model = model;
-            this.ManufactureYear = manufactureYear;
-        }
+    public int OwnerId { get; set; }
 
-        public int VehicleID { get => vehicleID; set => vehicleID = value; }
-        public string PlateNumber { get => plateNumber; set => plateNumber = value; }
-        public int OwnerID { get => ownerID; set => ownerID = value; }
-        public string Brand { get => brand; set => brand = value; }
-        public string Model { get => model; set => model = value; }
-        public int ManufactureYear { get => manufactureYear; set => manufactureYear = value; }
-    }
+    public string? Brand { get; set; }
 
+    public string? Model { get; set; }
+
+    public int? ManufactureYear { get; set; }
+
+    public virtual User Owner { get; set; } = null!;
 }

@@ -1,157 +1,77 @@
 ﻿using TrafficViolationApp.model;
 using Microsoft.Data.SqlClient;
 using BCrypt.Net;
+using TrafficViolationApp.dao;
+using System.Data;
+using System.Net;
+using System;
+using System.Windows;
 
 namespace TrafficViolationApp.dao
-{
+{ 
     class UserDAO : IDAOInterface<User, int>
     {
-        private readonly DbContext dbContext = new DbContext();
-        public int insert(User user)
+        private readonly TrafficDBContext context;
+        public UserDAO()
         {
-            string query = "INSERT INTO Users (FullName, Email, Password, Role, Phone, Address) " +
-                           "VALUES (@FullName, @Email, @Password, @Role, @Phone, @Address)";
-
-            try
-            {
-                using (var connection = dbContext.GetConnection())
-                {
-                    SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@FullName", user.FullName);
-                    command.Parameters.AddWithValue("@Email", user.Email);
-
-                    string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password, 10);
-                    command.Parameters.AddWithValue("@Password", hashedPassword);
-
-                    command.Parameters.AddWithValue("@Role", user.Role);
-                    command.Parameters.AddWithValue("@Phone", user.Phone);
-                    command.Parameters.AddWithValue("@Address", user.Address);
-
-                    connection.Open();
-                    return command.ExecuteNonQuery();
-                }
-            }
-            catch (SqlException ex)
-            {
-                Console.WriteLine($"Database error: {ex.Message}");
-                return -1;
-            }
+            context = new TrafficDBContext();
         }
 
-        public int delete(User user)
+        public int delete(User t)
         {
-            string query = "DELETE FROM Users WHERE UserID = @UserID";
+            var existingUser = context.Users.Find(t.UserId);
+            if (existingUser == null) return 0;
+            context.Users.Remove(t);
+            return context.SaveChanges();
 
-            using (var connection = dbContext.GetConnection())
-            {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@UserID", user.UserID);
-
-                connection.Open();
-                return command.ExecuteNonQuery();
-            }
         }
 
-        public int update(User user)
+        public int insert(User t)
         {
-            string query = "UPDATE Users SET FullName = @FullName, Email = @Email, Password = @Password, " +
-                           "Role = @Role, Phone = @Phone, Address = @Address WHERE UserID = @UserID";
-
-            using (var connection = dbContext.GetConnection())
-            {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@UserID", user.UserID);
-                command.Parameters.AddWithValue("@FullName", user.FullName);
-                command.Parameters.AddWithValue("@Email", user.Email);
-                command.Parameters.AddWithValue("@Password", user.Password);
-                command.Parameters.AddWithValue("@Role", user.Role);
-                command.Parameters.AddWithValue("@Phone", user.Phone);
-                command.Parameters.AddWithValue("@Address", user.Address);
-
-                connection.Open();
-                return command.ExecuteNonQuery();
-            }
+            t.Password = BCrypt.Net.BCrypt.HashPassword(t.Password);
+            context.Users.Add(t);
+            return context.SaveChanges();
         }
 
         public List<User> selectAll()
         {
-            List<User> users = new List<User>();
-            string query = "SELECT * FROM Users";
-
-            using (var connection = dbContext.GetConnection())
-            {
-                SqlCommand command = new SqlCommand(query, connection);
-                connection.Open();
-
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        users.Add(new User
-                        {
-                            UserID = Convert.ToInt32(reader["UserID"]),
-                            FullName = reader["FullName"].ToString(),
-                            Email = reader["Email"].ToString(),
-                            Password = reader["Password"].ToString(),
-                            Role = reader["Role"].ToString(),
-                            Phone = reader["Phone"].ToString(),
-                            Address = reader["Address"].ToString()
-                        });
-                    }
-                }
-            }
-            return users;
+            return context.Users.ToList();
         }
 
-       
-
-        public bool checkLogin(string email, string password)
+        public User? selectById(int id)
         {
-            string query = "SELECT Password FROM Users WHERE Email = @Email";
-
-            using (var connection = dbContext.GetConnection())
-            {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Email", email);
-                connection.Open();
-
-                var storedPasswordHash = command.ExecuteScalar() as string;
-                if (storedPasswordHash == null)
-                {
-                    return false;
-                }
-                return BCrypt.Net.BCrypt.Verify(password, storedPasswordHash);
-            }
+            return context.Users.Find(id);
         }
 
-        public User selectById(int id)
+        public int update(User t)
         {
-            string query = "SELECT * FROM Users WHERE UserID = @UserID";
+            var existingUser = context.Users.Find(t.UserId);
+            if (existingUser == null) return 0;
 
-            using (var connection = dbContext.GetConnection())
+            existingUser.FullName = t.FullName;
+            existingUser.Email = t.Email;
+            existingUser.Role = t.Role;
+            existingUser.Phone = t.Phone;
+            existingUser.Address = t.Address;
+
+            if (!string.IsNullOrEmpty(t.Password.Trim()))
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@UserID", id);
-                connection.Open();
-
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        return new User
-                        {
-                            UserID = Convert.ToInt32(reader["UserID"]),
-                            FullName = reader["FullName"].ToString(),
-                            Email = reader["Email"].ToString(),
-                            Password = reader["Password"].ToString(),
-                            Role = reader["Role"].ToString(),
-                            Phone = reader["Phone"].ToString(),
-                            Address = reader["Address"].ToString()
-                        };
-                    }
-                }
+               MessageBox.Show("Password not empty! "+ t.Password, "Validate Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                existingUser.Password = BCrypt.Net.BCrypt.HashPassword(t.Password);
             }
+
+            return context.SaveChanges();
+        }
+        public User? CheckLogin(string email, string password)
+        {
+            var existingUser = context.Users.FirstOrDefault(u => u.Email == email);
+            if (existingUser == null) return null;
+
+            if (BCrypt.Net.BCrypt.Verify(password, existingUser.Password))
+                return existingUser;
+
             return null;
         }
+
     }
 }

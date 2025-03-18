@@ -1,17 +1,17 @@
-﻿using System.Globalization;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using TrafficViolationApp.dao; // Import DAO namespace
-using TrafficViolationApp.model; // Import Violation model namespace
+using TrafficViolationApp.dao; 
+using TrafficViolationApp.view.UserControls;
 
 namespace TrafficViolationApp
 {
-    public partial class Violations : Window
+    public partial class Violations : Window, INotifyPropertyChanged
     {
         private int currentUserId;
         private ViolationDAO violationDAO;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public Violations(int userId)
         {
@@ -19,6 +19,37 @@ namespace TrafficViolationApp
             currentUserId = userId;  // Store the userId
             violationDAO = new ViolationDAO(); // Initialize ViolationDAO
             LoadViolations();
+        }
+
+        private void SidebarMenu_MenuItemSelected(object sender, MenuItemSelectedEventArgs e)
+        {
+            // Navigate to different pages based on menu selection
+            switch (e.MenuItem)
+            {
+                case "Dashboard":
+                    Home home = new Home();
+                    home.Show();
+                    this.Close();
+                    break;
+                case "Violations":
+                    // Navigate to Violations
+                    break;
+                case "Vehicles":
+                    // Navigate to Vehicles
+                    break;
+                case "Users":
+                    // Already on Users page
+                    break;
+                case "Reports":
+                    // Navigate to Reports
+                    break;
+                case "Notifications":
+                    // Navigate to Notifications
+                    break;
+                case "Settings":
+                    // Navigate to Settings
+                    break;
+            }
         }
 
         private void LoadViolations()

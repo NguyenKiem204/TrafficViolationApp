@@ -43,10 +43,17 @@ namespace TrafficViolationApp
                     this.Close();
                     break;
                 case "Violations":
-                    // Navigate to Violations
-                    Violations violations = new Violations(2);
-                    violations.Show();
-                    this.Close();
+                    int currentUserId = UserSession.Instance.User?.UserId ?? 0;
+                    if (currentUserId != 0)
+                    {
+                        Violations violationsPage = new(currentUserId);
+                        violationsPage.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("User is not logged in.");
+                    }
                     break;
                 case "Vehicles":
                     // Navigate to Vehicles

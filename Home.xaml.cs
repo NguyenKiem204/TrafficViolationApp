@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TrafficViolationApp.model;
 using TrafficViolationApp.view.UserControls;
 
 namespace TrafficViolationApp
@@ -29,6 +30,8 @@ namespace TrafficViolationApp
             sidebarMenu.LogoutClicked += SidebarMenu_LogoutClicked;
 
         }
+
+
         private void SidebarMenu_MenuItemSelected(object sender, MenuItemSelectedEventArgs e)
         {
             // Navigate to different pages based on menu selection
@@ -41,6 +44,9 @@ namespace TrafficViolationApp
                     break;
                 case "Violations":
                     // Navigate to Violations
+                    Violations violations = new Violations(2);
+                    violations.Show();
+                    this.Close();
                     break;
                 case "Vehicles":
                     // Navigate to Vehicles

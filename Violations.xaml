@@ -78,15 +78,15 @@
 
                         <Grid Grid.Row="0" Background="#F8F8F8">
                             <Grid.Margin>15,12,15,12</Grid.Margin>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="120"/>
-                            </Grid.ColumnDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="50"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="80"/>
+								<ColumnDefinition Width="120"/>
+								<ColumnDefinition Width="120"/>
+								<ColumnDefinition Width="120"/>
+							</Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="ID" FontWeight="SemiBold"/>
                             <TextBlock Grid.Column="1" Text="Plate Number" FontWeight="SemiBold"/>
@@ -118,9 +118,9 @@
                                             <ColumnDefinition Width="50"/>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="100"/>
-                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="120"/>
+                                            <ColumnDefinition Width="120"/>
                                             <ColumnDefinition Width="120"/>
                                         </Grid.ColumnDefinitions>
 
@@ -129,10 +129,28 @@
                                         <TextBlock Grid.Column="2" Text="{Binding ViolationType}" VerticalAlignment="Center"/>
                                         <TextBlock Grid.Column="3" Text="{Binding FineAmount}" VerticalAlignment="Center"/>
                                         <TextBlock Grid.Column="4" Text="{Binding FineDate}" VerticalAlignment="Center"/>
-                                        <TextBlock Grid.Column="5" Text="{Binding Status}" VerticalAlignment="Center"/>
+										<TextBlock Grid.Column="5" VerticalAlignment="Center">
+											<TextBlock.Style>
+												<Style TargetType="TextBlock">
+													<Style.Triggers>
+														<!-- DataTrigger to check if PaidStatus is true -->
+														<DataTrigger Binding="{Binding PaidStatus}" Value="True">
+															<Setter Property="Text" Value="Đã trả"/>
+														</DataTrigger>
 
-                                        <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Left">
-                                            <Button x:Name="btnRespond" Content="Respond" Margin="0,0,5,0" Padding="8,3"
+														<!-- DataTrigger to check if PaidStatus is false -->
+														<DataTrigger Binding="{Binding PaidStatus}" Value="False">
+															<Setter Property="Text" Value="Chưa trả"/>
+														</DataTrigger>
+													</Style.Triggers>
+												</Style>
+											</TextBlock.Style>
+										</TextBlock>
+
+
+
+										<StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Left">
+                                            <Button x:Name="btnRespond" Content="View Details" Margin="0,0,5,0" Padding="8,3"
                                                     Background="#304097" Foreground="White" BorderThickness="0"
                                                     Tag="{Binding ViolationId}" Click="btnRespond_Click">
                                                 <Button.Resources>

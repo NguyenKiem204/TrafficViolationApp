@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using TrafficViolationApp.dao; // Import DAO namespace
 using TrafficViolationApp.model; // Import Violation model namespace
 
@@ -50,8 +52,6 @@ namespace TrafficViolationApp
                 // Do something with the selected item
             }
         }
-
-
 
     }
 }

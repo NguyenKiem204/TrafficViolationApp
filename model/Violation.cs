@@ -19,6 +19,10 @@ public partial class Violation
 
     public bool? PaidStatus { get; set; }
 
+    public string ViolationType { get; set; } = null!;
+    public string Description { get; set; } = null!;
+
+
     public virtual Report Report { get; set; } = null!;
 
     public virtual User? Violator { get; set; }

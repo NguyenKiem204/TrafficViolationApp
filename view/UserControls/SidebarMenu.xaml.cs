@@ -71,6 +71,8 @@ namespace TrafficViolationApp.view.UserControls
                 btnVehicles,
                 btnUsers,
                 btnNotifications,
+                btnManagerNoti,
+                btnManagerReport,
                 btnSettings
             };
         }

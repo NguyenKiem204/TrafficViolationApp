@@ -46,7 +46,7 @@ namespace TrafficViolationApp
 
             userDAO = new UserDAO();
             sidebarMenu.SetActiveMenuItem("Users");
-            sidebarMenu.SetUserInfo("Admin User", "Administrator", "AU");
+            //sidebarMenu.SetUserInfo("Admin User", "Administrator", "AU");
             LoadUsers();
 
             sidebarMenu.MenuItemSelected += SidebarMenu_MenuItemSelected;

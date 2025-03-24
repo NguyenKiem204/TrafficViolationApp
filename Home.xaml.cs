@@ -31,7 +31,6 @@ namespace TrafficViolationApp
         }
         private void SidebarMenu_MenuItemSelected(object sender, MenuItemSelectedEventArgs e)
         {
-            // Navigate to different pages based on menu selection
             switch (e.MenuItem)
             {
                 case "Dashboard":
@@ -40,10 +39,13 @@ namespace TrafficViolationApp
                     this.Close();
                     break;
                 case "Violations":
-                    // Navigate to Violations
+                    break;
+                case "SendViolions":
+                    SendReport sendReport = new SendReport();
+                    sendReport.Show();
+                    this.Close();
                     break;
                 case "Vehicles":
-                    // Navigate to Vehicles
                     break;
                 case "Users":
                     ManagerUser managerUser = new ManagerUser();
@@ -51,13 +53,10 @@ namespace TrafficViolationApp
                         this.Close();
                     break;
                 case "Reports":
-                    // Navigate to Reports
                     break;
                 case "Notifications":
-                    // Navigate to Notifications
                     break;
                 case "Settings":
-                    // Navigate to Settings
                     break;
             }
         }

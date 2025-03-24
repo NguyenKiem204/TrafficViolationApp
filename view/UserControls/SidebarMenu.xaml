@@ -72,6 +72,12 @@
                     <TextBlock Text="Violations"/>
                 </StackPanel>
             </Button>
+            <Button Style="{StaticResource MenuButtonStyle}" Tag="SendViolions" x:Name="btnSendViolions" Click="OnMenuItemClick">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE724;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="SendViolions"/>
+                </StackPanel>
+            </Button>
             <Button Style="{StaticResource MenuButtonStyle}" Tag="Vehicles" x:Name="btnVehicles" Click="OnMenuItemClick">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="&#xE804;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>

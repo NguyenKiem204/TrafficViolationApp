@@ -67,6 +67,7 @@ namespace TrafficViolationApp.view.UserControls
             {
                 btnDashboard,
                 btnReports,
+                btnSendViolions,
                 btnViolations,
                 btnVehicles,
                 btnUsers,

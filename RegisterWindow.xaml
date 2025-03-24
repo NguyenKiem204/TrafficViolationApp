@@ -1,0 +1,245 @@
+﻿<Window x:Class="TrafficViolationApp.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TrafficViolationApp"
+        mc:Ignorable="d"
+        Title="Đăng ký tài khoản" 
+        Height="800" Width="1400"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        WindowStyle="SingleBorderWindow"
+        Background="White">
+
+    <Window.Resources>
+        <!-- Input field style -->
+        <Style x:Key="ModernTextBox" TargetType="{x:Type TextBox}">
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="Padding" Value="0,10"/>
+            <Setter Property="Margin" Value="0,8,0,25"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="#6C63FF"/>
+                                <Setter Property="BorderThickness" Value="0,0,0,2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Password box style -->
+        <Style x:Key="ModernPasswordBox" TargetType="{x:Type PasswordBox}">
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="Padding" Value="0,10"/>
+            <Setter Property="Margin" Value="0,8,0,25"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type PasswordBox}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="#6C63FF"/>
+                                <Setter Property="BorderThickness" Value="0,0,0,2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ComboBox style -->
+        <Style x:Key="ModernComboBox" TargetType="{x:Type ComboBox}">
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="Padding" Value="0,10"/>
+            <Setter Property="Margin" Value="0,8,0,25"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <!-- Button style -->
+        <Style x:Key="PrimaryButton" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#6C63FF"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Padding" Value="20,15"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="30" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#5A52D5"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#4842A8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Label style -->
+        <Style x:Key="InputLabel" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="#666666"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Main layout columns -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="45*"/>
+            <ColumnDefinition Width="55*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left panel with your background image -->
+        <Grid Grid.Column="0">
+            <Grid.Background>
+                <ImageBrush ImageSource="/images/bg1.jpeg" Stretch="UniformToFill"/>
+            </Grid.Background>
+            <Rectangle Fill="#3F3D9D" Opacity="0.7"/>
+
+            <StackPanel VerticalAlignment="Center" Margin="60,0">
+                <TextBlock Text="Hệ thống quản lý" FontSize="36" FontWeight="Bold" Foreground="White" Margin="0,0,0,10"/>
+                <TextBlock Text="vi phạm giao thông" FontSize="36" FontWeight="Bold" Foreground="White" Margin="0,0,0,50"/>
+
+                <TextBlock Text="Tạo tài khoản và bắt đầu sử dụng hệ thống quản lý vi phạm giao thông hiện đại." 
+                           FontSize="16" Foreground="White" TextWrapping="Wrap" Opacity="0.9" Margin="0,0,0,50" LineHeight="24"/>
+
+                <!-- Feature highlights with modern icons -->
+                <StackPanel Margin="0,20,0,0">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,30">
+                        <Border Width="48" Height="48" Background="#000" CornerRadius="24" Margin="0,0,15,0">
+                            <TextBlock Text="&#xE922;" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel>
+                            <TextBlock Text="Tra cứu nhanh chóng" FontSize="18" FontWeight="SemiBold" Foreground="White"/>
+                            <TextBlock Text="Dễ dàng xem thông tin vi phạm" FontSize="14" Foreground="White" Opacity="0.8"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,30">
+                        <Border Width="48" Height="48" Background="#000" CornerRadius="24" Margin="0,0,15,0">
+                            <TextBlock Text="&#xE91F;" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel>
+                            <TextBlock Text="Quản lý hiệu quả" FontSize="18" FontWeight="SemiBold" Foreground="White"/>
+                            <TextBlock Text="Theo dõi và cập nhật tình trạng" FontSize="14" Foreground="White" Opacity="0.8"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="48" Height="48" Background="#000" CornerRadius="24" Margin="0,0,15,0">
+                            <TextBlock Text="&#xE8BD;" FontFamily="Segoe MDL2 Assets" FontSize="20" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel>
+                            <TextBlock Text="Thông báo kịp thời" FontSize="18" FontWeight="SemiBold" Foreground="White"/>
+                            <TextBlock Text="Nhận thông báo về trạng thái vụ việc" FontSize="14" Foreground="White" Opacity="0.8"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        
+        <Border Grid.Column="1" Background="White">
+            <Grid>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="60" VerticalAlignment="Center">
+
+                        <StackPanel Margin="0,0,0,40">
+                            <TextBlock Text="Tạo tài khoản mới" FontSize="32" FontWeight="Bold" Foreground="#333333" Margin="0,0,0,15"/>
+                            <TextBlock Text="Vui lòng nhập đầy đủ thông tin để đăng ký" FontSize="16" Foreground="#666666"/>
+                        </StackPanel>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Column="0" Grid.Row="0" Margin="0,0,20,0">
+                                <TextBlock Text="Họ và tên" Style="{StaticResource InputLabel}"/>
+                                <TextBox x:Name="txtFullName" Style="{StaticResource ModernTextBox}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="0" Grid.Row="1" Margin="0,0,20,0">
+                                <TextBlock Text="Email" Style="{StaticResource InputLabel}"/>
+                                <TextBox x:Name="txtEmail" Style="{StaticResource ModernTextBox}"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="0" Grid.Row="2" Margin="0,0,20,0">
+                                <TextBlock Text="Mật khẩu" Style="{StaticResource InputLabel}"/>
+                                <PasswordBox x:Name="txtPassword" Style="{StaticResource ModernPasswordBox}"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Grid.Row="0">
+                                <TextBlock Text="Vai trò" Style="{StaticResource InputLabel}"/>
+                                <ComboBox x:Name="cboRole" Style="{StaticResource ModernComboBox}">
+                                    <ComboBoxItem Content="Citizen" IsSelected="True"/>
+                                    <ComboBoxItem Content="TrafficPolice"/>
+                                </ComboBox>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Grid.Row="1">
+                                <TextBlock Text="Số điện thoại" Style="{StaticResource InputLabel}"/>
+                                <TextBox x:Name="txtPhone" Style="{StaticResource ModernTextBox}"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Grid.Row="2">
+                                <TextBlock Text="Xác nhận mật khẩu" Style="{StaticResource InputLabel}"/>
+                                <PasswordBox x:Name="txtConfirmPassword" Style="{StaticResource ModernPasswordBox}"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <TextBlock Text="Địa chỉ" Style="{StaticResource InputLabel}" Margin="0,10,0,5"/>
+                        <TextBox x:Name="txtAddress" Style="{StaticResource ModernTextBox}" TextWrapping="Wrap" MinHeight="60" AcceptsReturn="True"/>
+
+                        <Button x:Name="btnRegister" Content="Đăng ký" Style="{StaticResource PrimaryButton}" Margin="0,30,0,0" Click="btnRegister_Click"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
+                            <TextBlock Text="Đã có tài khoản? " FontSize="14" Foreground="#666666"/>
+                            <TextBlock x:Name="txtLoginLink" Text="Đăng nhập" FontSize="14" Foreground="#6C63FF" Cursor="Hand" FontWeight="SemiBold" TextDecorations="None" MouseDown="txtLoginLink_MouseDown"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

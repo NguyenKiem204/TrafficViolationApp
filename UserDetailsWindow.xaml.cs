@@ -122,7 +122,7 @@ namespace TrafficViolationApp
                 if (isEditMode)
                 {
                     result = userDAO.update(currentUser);
-                    MessageBox.Show("SHOW UPDATE DATA: " + currentUser.ToString(), "Alert", MessageBoxButton.OK, MessageBoxImage.Information);
+                    //MessageBox.Show("SHOW UPDATE DATA: " + currentUser.ToString(), "Alert", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
@@ -136,10 +136,18 @@ namespace TrafficViolationApp
                     IsSuccess = true;
                     this.Close();
                 }
-                else
+                else if (result == 0 && !isEditMode)
                 {
+
                     MessageBox.Show(isEditMode ? "Failed to update user" : "Failed to add user",
                         "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else if (result == 0 && isEditMode)
+                {
+                    MessageBox.Show("User updated successfully",
+                         "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    IsSuccess = true;
+                    this.Close();
                 }
             }
             catch (Exception ex)

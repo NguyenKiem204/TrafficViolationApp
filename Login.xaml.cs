@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using TrafficViolationApp.config;
 using TrafficViolationApp.dao;
 using TrafficViolationApp.model;
 
@@ -24,7 +14,19 @@ namespace TrafficViolationApp
         public Login()
         {
             InitializeComponent();
+            LoadSavedCredentials();
         }
+
+        private void LoadSavedCredentials()
+        {
+            if (UserCredentialManager.TryGetCredentials(out string email, out string password))
+            {
+                txtEmail.Text = email;
+                txtPass.Password = password;
+                chkRememberMe.IsChecked = true;
+            }
+        }
+
         private void txtEmail_GotFocus(object sender, RoutedEventArgs e)
         {
             txtError.Text = "";
@@ -48,12 +50,21 @@ namespace TrafficViolationApp
 
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                txtError.Text = "Email or Password cannot be empty!";
+                txtError.Text = "Email hoặc mật khẩu không được để trống!";
                 return;
             }
+
             User? user = userDAO.CheckLogin(email, password);
             if (user != null)
             {
+                if (chkRememberMe.IsChecked == true)
+                {
+                    UserCredentialManager.SaveCredentials(email, password);
+                }
+                else
+                {
+                    UserCredentialManager.ClearCredentials();
+                }
                 UserSession.Instance.User = user;
                 Home home = new Home();
                 home.Show();
@@ -63,11 +74,23 @@ namespace TrafficViolationApp
             {
                 txtEmail.Text = email;
                 txtPass.Password = "";
-                txtError.Text = "Invalid email or password!";
+                txtError.Text = "Email hoặc mật khẩu không đúng!";
             }
         }
 
+        private void txtForgotPassword_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
 
+        }
 
+        private void txtRegister_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

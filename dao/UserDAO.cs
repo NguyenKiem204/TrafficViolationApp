@@ -72,6 +72,10 @@ namespace TrafficViolationApp.dao
 
             return null;
         }
+        public bool emailExists(string email)
+        {
+            return context.Users.Any(u => u.Email == email);
+        }
 
     }
 }

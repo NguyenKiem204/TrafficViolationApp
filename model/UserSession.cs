@@ -28,6 +28,12 @@ namespace TrafficViolationApp.model
         {
             User = null;
         }
+        public void Reset()
+        {
+            User = null;
+            _instance = null;
+        }
+
     }
 
 

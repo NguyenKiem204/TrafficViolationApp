@@ -107,6 +107,11 @@ namespace TrafficViolationApp
                 case "Violations":
                     // Navigate to Violations
                     break;
+                case "SendViolions":
+                    SendReport sendReport = new SendReport();
+                    sendReport.Show();
+                    this.Close();
+                    break;
                 case "Vehicles":
                     // Navigate to Vehicles
                     break;

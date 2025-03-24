@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="images\back4.jpg" />
+    <None Remove="images\background.jpeg" />
     <None Remove="images\bg.avif" />
     <None Remove="images\bg1.jpeg" />
     <None Remove="images\bg2.webp" />
@@ -22,12 +23,14 @@
   <ItemGroup>
     <Content Include="images\back4.jpg" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="CloudinaryDotNet" Version="1.27.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.2" />
+    <Resource Include="images\background.jpeg" />
     <Resource Include="images\bg.avif" />
     <Resource Include="images\bg1.jpeg" />
     <Resource Include="images\bg2.webp" />
@@ -40,8 +43,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

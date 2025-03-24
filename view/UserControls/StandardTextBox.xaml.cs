@@ -1,45 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TrafficViolationApp.view.UserControls
 {
-    /// <summary>
-    /// Interaction logic for StandardTextBox.xaml
-    /// </summary>
     public partial class StandardTextBox : UserControl
     {
-        public StandardTextBox()
-        {
-            InitializeComponent();
-        }
-        private string placeholder;
+        public static readonly DependencyProperty PlaceholderProperty =
+            DependencyProperty.Register("Placeholder", typeof(string), typeof(StandardTextBox), new PropertyMetadata(""));
 
         public string Placeholder
         {
-            get { return placeholder; }
-            set
-            {
-                placeholder = value;
-                tbPlaceholder.Text = placeholder;
-            }
+            get { return (string)GetValue(PlaceholderProperty); }
+            set { SetValue(PlaceholderProperty, value); }
         }
 
-        private void btnClear_Click(object sender, RoutedEventArgs e)
+        public string Text
         {
-            txtInput.Clear();
-            txtInput.Focus();
+            get { return txtInput.Text; }
+            set { txtInput.Text = value; }
+        }
+
+        // Define a custom event for text changes
+        public event EventHandler TextChanged;
+
+        public StandardTextBox()
+        {
+            InitializeComponent();
+            this.DataContext = this;
         }
 
         private void txtInput_TextChanged(object sender, TextChangedEventArgs e)
@@ -47,7 +35,17 @@ namespace TrafficViolationApp.view.UserControls
             if (string.IsNullOrEmpty(txtInput.Text))
                 tbPlaceholder.Visibility = Visibility.Visible;
             else
-                tbPlaceholder.Visibility = Visibility.Hidden;
+                tbPlaceholder.Visibility = Visibility.Collapsed;
+
+            // Raise the custom event
+            TextChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            txtInput.Clear();
+            tbPlaceholder.Visibility = Visibility.Visible;
+            txtInput.Focus();
         }
     }
 }

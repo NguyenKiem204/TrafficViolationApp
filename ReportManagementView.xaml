@@ -1,0 +1,198 @@
+﻿<Window x:Class="TrafficViolationApp.ReportManagementView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TrafficViolationApp"
+        xmlns:component="clr-namespace:TrafficViolationApp.view.UserControls"
+        mc:Ignorable="d"
+        Icon="/images/logo1.png"
+        Title="Report Management" Height="720" Width="1280"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <component:SidebarMenu x:Name="sidebarMenu" Grid.Column="0"/>
+        <Grid Grid.Column="1" Background="#F5F6FA">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" Margin="30,0">
+                    <TextBlock Text="Traffic Violation Reports" FontSize="24" FontWeight="Bold"/>
+                    <TextBlock Text="Manage and process citizen reports" Foreground="#777777"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="20">
+                    <Border Width="40" Height="40" Background="#F0F0F0" CornerRadius="20" Margin="10,0">
+                        <TextBlock Text="&#xE91C;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#304097"/>
+                    </Border>
+                    <Border Width="40" Height="40" Background="#F0F0F0" CornerRadius="20" Margin="10,0">
+                        <TextBlock Text="&#xE8BD;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#304097"/>
+                    </Border>
+                </StackPanel>
+                <Rectangle Grid.ColumnSpan="2" Height="1" Fill="#D3D3D3" VerticalAlignment="Bottom"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Fixed: Removed TextChanged event binding -->
+                    <component:StandardTextBox x:Name="txtSearch" Placeholder="Search reports..." Margin="0,0,10,0"/>
+
+                    <ComboBox x:Name="cmbStatus" Grid.Column="1" Width="150" Margin="0,0,10,0" SelectionChanged="cmbStatus_SelectionChanged">
+                        <ComboBoxItem Content="All Reports" IsSelected="True"/>
+                        <ComboBoxItem Content="Pending"/>
+                        <ComboBoxItem Content="Approved"/>
+                        <ComboBoxItem Content="Rejected"/>
+                    </ComboBox>
+
+                    <Button x:Name="btnRefresh" Grid.Column="2" Content="Refresh" Background="#304097" Foreground="White" 
+                            Padding="15,10" BorderThickness="0" Click="btnRefresh_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Grid>
+
+                <!-- Reports ListView -->
+                <Border Grid.Row="1" Background="White" BorderBrush="#EEEEEE" BorderThickness="1" CornerRadius="8">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Background="#F8F8F8">
+                            <Grid.Margin>15,12,15,12</Grid.Margin>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="ID" FontWeight="SemiBold"/>
+                            <TextBlock Grid.Column="1" Text="Plate Number" FontWeight="SemiBold"/>
+                            <TextBlock Grid.Column="2" Text="Violation Type" FontWeight="SemiBold"/>
+                            <TextBlock Grid.Column="3" Text="Location" FontWeight="SemiBold"/>
+                            <TextBlock Grid.Column="4" Text="Date" FontWeight="SemiBold"/>
+                            <TextBlock Grid.Column="5" Text="Status" FontWeight="SemiBold"/>
+                            <TextBlock Grid.Column="6" Text="Actions" FontWeight="SemiBold"/>
+                        </Grid>
+
+                        <!-- Reports List -->
+                        <ListView x:Name="lvReports" Grid.Row="1" BorderThickness="0" Background="Transparent" 
+                                  ItemsSource="{Binding Reports}" SelectionChanged="lvReports_SelectionChanged"
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Margin" Value="0"/>
+                                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                    <Setter Property="BorderBrush" Value="#EEEEEE"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.Margin>15,12,15,12</Grid.Margin>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="120"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="120"/>
+                                            <ColumnDefinition Width="120"/>
+                                            <ColumnDefinition Width="150"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="{Binding ReportId}" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding PlateNumber}" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding ViolationType}" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="3" Text="{Binding Location}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Column="4" Text="{Binding ReportDate, StringFormat='{}{0:MM/dd/yyyy}'}" VerticalAlignment="Center"/>
+
+                                        <Border Grid.Column="5" CornerRadius="3" Padding="5,2" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Status}" Value="Pending">
+                                                            <Setter Property="Background" Value="#FFF3CD"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Status}" Value="Approved">
+                                                            <Setter Property="Background" Value="#D4EDDA"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Status}" Value="Rejected">
+                                                            <Setter Property="Background" Value="#F8D7DA"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <TextBlock Text="{Binding Status}" VerticalAlignment="Center">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Status}" Value="Pending">
+                                                                <Setter Property="Foreground" Value="#856404"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Status}" Value="Approved">
+                                                                <Setter Property="Foreground" Value="#155724"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Status}" Value="Rejected">
+                                                                <Setter Property="Foreground" Value="#721C24"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </Border>
+
+                                        <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Left">
+                                            <Button x:Name="btnViewDetails" Content="View Details" Margin="0,0,5,0" Padding="8,3"
+                                                    Background="#304097" Foreground="White" BorderThickness="0"
+                                                    Tag="{Binding ReportId}" Click="btnViewDetails_Click">
+                                                <Button.Resources>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="CornerRadius" Value="3"/>
+                                                    </Style>
+                                                </Button.Resources>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

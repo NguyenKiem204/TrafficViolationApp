@@ -1,0 +1,171 @@
+﻿<Window x:Class="TrafficViolationApp.NotificationManagementView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TrafficViolationApp"
+        xmlns:component="clr-namespace:TrafficViolationApp.view.UserControls"
+        mc:Ignorable="d"
+        Icon="/images/logo1.png"
+        Title="Notification Management" Height="720" Width="1280"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <component:SidebarMenu x:Name="sidebarMenu" Grid.Column="0"/>
+        <Grid Grid.Column="1" Background="#F5F6FA">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Center" Margin="30,0">
+                    <TextBlock Text="Violation Notifications" FontSize="24" FontWeight="Bold"/>
+                    <TextBlock Text="Manage notifications sent to violators" Foreground="#777777"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="20">
+                    <Border Width="40" Height="40" Background="#F0F0F0" CornerRadius="20" Margin="10,0">
+                        <TextBlock Text="&#xE91C;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#304097"/>
+                    </Border>
+                    <Border Width="40" Height="40" Background="#F0F0F0" CornerRadius="20" Margin="10,0">
+                        <TextBlock Text="&#xE8BD;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#304097"/>
+                    </Border>
+                </StackPanel>
+                <Rectangle Grid.ColumnSpan="2" Height="1" Fill="#D3D3D3" VerticalAlignment="Bottom"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <component:StandardTextBox x:Name="txtSearch" Placeholder="Search notifications..." Margin="0,0,10,0"/>
+
+                    <Button x:Name="btnRefresh" Grid.Column="1" Content="Refresh" Background="#304097" Foreground="White" 
+                            Padding="15,10" BorderThickness="0" Click="btnRefresh_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Grid>
+
+                <!-- Notifications ListView -->
+                <Border Grid.Row="1" Background="White" BorderBrush="#EEEEEE" BorderThickness="1" CornerRadius="8">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Background="#F8F8F8">
+                            <Grid.Margin>15,12,15,12</Grid.Margin>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="ID" FontWeight="SemiBold"/>
+                            <TextBlock Grid.Column="1" Text="Recipient" FontWeight="SemiBold"/>
+                            <TextBlock Grid.Column="2" Text="Plate Number" FontWeight="SemiBold"/>
+                            <TextBlock Grid.Column="3" Text="Sent Date" FontWeight="SemiBold"/>
+                            <TextBlock Grid.Column="4" Text="Read" FontWeight="SemiBold"/>
+                            <TextBlock Grid.Column="5" Text="Message" FontWeight="SemiBold"/>
+                        </Grid>
+
+                        <!-- Notifications List -->
+                        <ListView x:Name="lvNotifications" Grid.Row="1" BorderThickness="0" Background="Transparent" 
+                                  ItemsSource="{Binding Notifications}" SelectionChanged="lvNotifications_SelectionChanged"
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Margin" Value="0"/>
+                                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                    <Setter Property="BorderBrush" Value="#EEEEEE"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.Margin>15,12,15,12</Grid.Margin>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="120"/>
+                                            <ColumnDefinition Width="120"/>
+                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="{Binding NotificationId}" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding User.FullName}" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding PlateNumber}" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="3" Text="{Binding SentDate, StringFormat='{}{0:MM/dd/yyyy}'}" VerticalAlignment="Center"/>
+
+                                        <Border Grid.Column="4" CornerRadius="3" Padding="5,2" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsRead}" Value="True">
+                                                            <Setter Property="Background" Value="#D4EDDA"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsRead}" Value="False">
+                                                            <Setter Property="Background" Value="#FFF3CD"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <TextBlock VerticalAlignment="Center">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsRead}" Value="True">
+                                                                <Setter Property="Text" Value="Yes"/>
+                                                                <Setter Property="Foreground" Value="#155724"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding IsRead}" Value="False">
+                                                                <Setter Property="Text" Value="No"/>
+                                                                <Setter Property="Foreground" Value="#856404"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </Border>
+
+                                        <TextBlock Grid.Column="5" Text="{Binding Message}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

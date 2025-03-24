@@ -96,6 +96,20 @@
                     <TextBlock Text="Notifications"/>
                 </StackPanel>
             </Button>
+
+            <Button Style="{StaticResource MenuButtonStyle}" Tag="ManagerReport" x:Name="btnManagerReport" Click="OnMenuItemClick">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="ManagerReport"/>
+                </StackPanel>
+            </Button>
+
+            <Button Style="{StaticResource MenuButtonStyle}" Tag="ManagerNotification" x:Name="btnManagerNoti" Click="OnMenuItemClick">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="ManagerNotification"/>
+                </StackPanel>
+            </Button>
             <Button Style="{StaticResource MenuButtonStyle}" Tag="Settings" x:Name="btnSettings" Click="OnMenuItemClick">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>

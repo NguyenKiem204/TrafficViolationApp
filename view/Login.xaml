@@ -124,6 +124,7 @@
                                     Foreground="White"
                                     Width="280"
                                     Height="40"
+                                    Cursor="Hand"
                                     Margin="5"
                                     BorderBrush="White"
                                     BorderThickness="1"

@@ -46,7 +46,8 @@ namespace TrafficViolationApp
 
             userDAO = new UserDAO();
             sidebarMenu.SetActiveMenuItem("Users");
-            //sidebarMenu.SetUserInfo("Admin User", "Administrator", "AU");
+            User user = UserSession.Instance.User;
+            sidebarMenu.SetUserInfo(user.FullName, user.Role, user.GetInitials());
             LoadUsers();
 
             sidebarMenu.MenuItemSelected += SidebarMenu_MenuItemSelected;
@@ -96,7 +97,6 @@ namespace TrafficViolationApp
 
         private void SidebarMenu_MenuItemSelected(object sender, MenuItemSelectedEventArgs e)
         {
-            // Navigate to different pages based on menu selection
             switch (e.MenuItem)
             {
                 case "Dashboard":
@@ -105,7 +105,6 @@ namespace TrafficViolationApp
                     this.Close();
                     break;
                 case "Violations":
-                    // Navigate to Violations
                     break;
                 case "SendViolions":
                     SendReport sendReport = new SendReport();
@@ -113,19 +112,14 @@ namespace TrafficViolationApp
                     this.Close();
                     break;
                 case "Vehicles":
-                    // Navigate to Vehicles
                     break;
                 case "Users":
-                    // Already on Users page
                     break;
                 case "Reports":
-                    // Navigate to Reports
                     break;
                 case "Notifications":
-                    // Navigate to Notifications
                     break;
                 case "Settings":
-                    // Navigate to Settings
                     break;
             }
         }

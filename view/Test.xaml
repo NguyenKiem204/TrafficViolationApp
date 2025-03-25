@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Test" Height="450" Width="800">
     <Grid>
-        <Button Name="btn" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Test Here" Width="100" Click="btn_Click" Height="25"/>
+        <Image Source="https://res.cloudinary.com/dozf7mhsv/image/upload/v1742721826/traffic_violations/images/traffic_violation_20250323162343_WIN_20241117_02_58_41_Pro.jpg" Width="300" Height="200"/>
+        <MediaElement Source="https://res.cloudinary.com/dozf7mhsv/video/upload/v1742721834/traffic_violations/videos/traffic_violation_20250323162345_background.mp4" Width="640" Height="360" LoadedBehavior="Play"/>
     </Grid>
 </Window>

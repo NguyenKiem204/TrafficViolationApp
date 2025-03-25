@@ -38,7 +38,7 @@ namespace TrafficViolationApp
             dpViolationDate.SelectedDate = DateTime.Now;
             User user = UserSession.Instance.User;
             currentUserId = user.UserId;
-            sidebarMenu.SetUserInfo(user.FullName, user.Role, "NK");
+            sidebarMenu.SetUserInfo(user.FullName, user.Role, user.GetInitials());
         }
 
         private void SidebarMenu_MenuItemSelected(object sender, MenuItemSelectedEventArgs e)
@@ -92,7 +92,6 @@ namespace TrafficViolationApp
                     imagePath = openFileDialog.FileName;
                     txtImagePath.Text = Path.GetFileName(imagePath);
 
-                    // Display image preview
                     BitmapImage bitmap = new BitmapImage();
                     bitmap.BeginInit();
                     bitmap.CacheOption = BitmapCacheOption.OnLoad;
@@ -138,11 +137,9 @@ namespace TrafficViolationApp
                     videoPath = openFileDialog.FileName;
                     txtVideoPath.Text = Path.GetFileName(videoPath);
 
-                    // Set up video preview
                     videoPreview.Source = new Uri(videoPath);
                     videoPreviewBorder.Visibility = Visibility.Visible;
 
-                    // Load the first frame but don't play automatically
                     videoPreview.Position = TimeSpan.FromMilliseconds(1);
                     videoPreview.Pause();
                 }
@@ -246,7 +243,6 @@ namespace TrafficViolationApp
                     videoUrl = cloudinaryService.UploadVideo(videoPath);
                 }
 
-                // Create and save the report with cloud URLs
                 Report report = new Report()
                 {
                     ViolationType = GetSelectedViolationType(),

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TrafficViolationApp.model;
 using TrafficViolationApp.view.UserControls;
 
 namespace TrafficViolationApp
@@ -24,9 +25,10 @@ namespace TrafficViolationApp
         {
             InitializeComponent();
             sidebarMenu.SetActiveMenuItem("Dashboard");
-            sidebarMenu.SetUserInfo("Admin User", "Administrator", "AU");
             sidebarMenu.MenuItemSelected += SidebarMenu_MenuItemSelected;
             sidebarMenu.LogoutClicked += SidebarMenu_LogoutClicked;
+            User user = UserSession.Instance.User;
+            sidebarMenu.SetUserInfo(user.FullName, user.Role, user.GetInitials());
 
         }
         private void SidebarMenu_MenuItemSelected(object sender, MenuItemSelectedEventArgs e)

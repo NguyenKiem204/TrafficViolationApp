@@ -106,7 +106,7 @@
 
             <Button Style="{StaticResource MenuButtonStyle}" Tag="ManagerNotification" x:Name="btnManagerNoti" Click="OnMenuItemClick">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock Text="&#xE7E7;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,10,0"/>
                     <TextBlock Text="ManagerNotification"/>
                 </StackPanel>
             </Button>

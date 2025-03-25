@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using TrafficViolationApp.config;
 using TrafficViolationApp.dao;
 using TrafficViolationApp.model;
+using TrafficViolationApp.view;
 
 namespace TrafficViolationApp
 {
@@ -54,7 +55,8 @@ namespace TrafficViolationApp
                 return;
             }
 
-            User? user = userDAO.CheckLogin(email, password);
+            var (user, message) = userDAO.CheckLogin(email, password);
+
             if (user != null)
             {
                 if (chkRememberMe.IsChecked == true)
@@ -65,6 +67,7 @@ namespace TrafficViolationApp
                 {
                     UserCredentialManager.ClearCredentials();
                 }
+
                 UserSession.Instance.User = user;
                 Home home = new Home();
                 home.Show();
@@ -74,9 +77,10 @@ namespace TrafficViolationApp
             {
                 txtEmail.Text = email;
                 txtPass.Password = "";
-                txtError.Text = "Email hoặc mật khẩu không đúng!";
+                txtError.Text = message;
             }
         }
+
 
         private void txtForgotPassword_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -85,12 +89,16 @@ namespace TrafficViolationApp
 
         private void txtRegister_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-
+            RegisterWindow registerWindow = new RegisterWindow();
+            registerWindow.Show();
+            this.Close();
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-
+            RegisterWindow registerWindow = new RegisterWindow();
+            registerWindow.Show();
+            this.Close();
         }
     }
 }

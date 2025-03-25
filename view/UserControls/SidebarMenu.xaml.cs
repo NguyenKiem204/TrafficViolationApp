@@ -24,6 +24,40 @@ namespace TrafficViolationApp.view.UserControls
 
         public event EventHandler LogoutClicked;
 
+        private Dictionary<string, List<string>> RoleMenuVisibility = new Dictionary<string, List<string>>
+    {
+        { "Admin", new List<string>
+            {
+                "Dashboard",
+                "Reports",
+                "Violations",
+                "SendViolions",
+                "Vehicles",
+                "Users",
+                "Notifications",
+                "ManagerReport",
+                "ManagerNotification",
+                "Settings"
+            }
+        },
+        { "TrafficPolice", new List<string>
+            {
+                "Dashboard",
+                "SendViolions",
+                "Users",
+                "ManagerReport",
+                "ManagerNotification",
+                "Settings"
+            }
+        },
+        { "Citizen", new List<string>
+            {
+                "Dashboard",
+                "SendViolions",
+                "Settings"
+            }
+        }
+    };
         public SidebarMenu()
         {
             InitializeComponent();
@@ -46,6 +80,25 @@ namespace TrafficViolationApp.view.UserControls
             txtUserName.Text = userName;
             txtUserRole.Text = userRole;
             txtUserInitials.Text = initials;
+
+            ApplyRoleBasedMenuVisibility(userRole);
+        }
+
+        private void ApplyRoleBasedMenuVisibility(string userRole)
+        {
+            List<string> visibleMenuItems = RoleMenuVisibility.ContainsKey(userRole)
+                ? RoleMenuVisibility[userRole]
+                : new List<string>();
+
+            Button[] menuButtons = GetMenuButtons();
+
+            foreach (var button in menuButtons)
+            {
+                string menuItem = button.Tag.ToString();
+                button.Visibility = visibleMenuItems.Contains(menuItem)
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
+            }
         }
 
         private void OnMenuItemClick(object sender, RoutedEventArgs e)

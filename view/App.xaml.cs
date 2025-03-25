@@ -1,20 +1,25 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 using TrafficViolationApp.model;
 
-namespace TrafficViolationApp
+namespace TrafficViolationApp.view
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        [STAThread]  // Bắt buộc cho WPF
+        public static void Main()
+        {
+            App app = new App();
+            app.InitializeComponent();
+            app.Run();
+        }
+
         public App()
         {
             this.DispatcherUnhandledException += App_DispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-
             this.Exit += App_Exit;
         }
 
@@ -22,7 +27,7 @@ namespace TrafficViolationApp
         {
             try
             {
-                 UserSession.Instance.Reset();
+                UserSession.Instance.Reset();
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
             }
@@ -45,5 +50,4 @@ namespace TrafficViolationApp
             Shutdown();
         }
     }
-
 }

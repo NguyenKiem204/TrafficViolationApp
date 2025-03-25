@@ -5,7 +5,7 @@ using System.Windows.Input;
 using TrafficViolationApp.dao;
 using TrafficViolationApp.model;
 
-namespace TrafficViolationApp
+namespace TrafficViolationApp.view
 {
     public partial class RegisterWindow : Window
     {
@@ -61,10 +61,9 @@ namespace TrafficViolationApp
 
                     if (result > 0)
                     {
-                        ShowSuccessMessage("Đăng ký tài khoản thành công!\nBạn có thể đăng nhập ngay bây giờ.");
-
-                        Login loginWindow = new Login();
-                        loginWindow.Show();
+                        ShowSuccessMessage("Đăng ký tài khoản thành công!\nVui lòng xác thực email của bạn để hoàn tất đăng ký.");
+                        EmailVerificationWindow verifyWindow = new EmailVerificationWindow(newUser.Email);
+                        verifyWindow.Show();
                         this.Close();
                     }
                     else
